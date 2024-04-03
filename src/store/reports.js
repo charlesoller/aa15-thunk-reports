@@ -27,7 +27,14 @@ export const removeReport = (reportId) => ({
 
 /** Thunk Action Creators: */
 
-// Your code here 
+export const fetchReportsThunk = () => async (dispatch) => {
+  const res = await fetch("/api/reports");
+  const reports = await res.json();
+  // console.log("REPORTS: ", reports)
+  dispatch(loadReports(reports));
+};
+
+// Your code here
 
 /** Selectors: */
 

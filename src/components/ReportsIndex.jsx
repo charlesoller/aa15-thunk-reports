@@ -1,9 +1,20 @@
 import { Link } from 'react-router-dom';
 import ReportIndexItem from './ReportIndexItem';
 import { resetDatabase } from '../mocks/storage';
+import { fetchReportsThunk } from '../store/reports';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const ReportsIndex = () => {
-  const reports = []; // populate from Redux store
+  const dispatch = useDispatch()
+  const reports = useSelector(state => Object.values(state.reports)); // populate from Redux store
+  // console.log(reports)
+
+  useEffect(() => {
+    dispatch(fetchReportsThunk())
+  }, [ dispatch ])
+
+  console.log(reports)
 
   /* **DO NOT CHANGE THE RETURN VALUE** */
   return (
