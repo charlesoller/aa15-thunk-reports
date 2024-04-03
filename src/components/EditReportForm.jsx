@@ -1,9 +1,17 @@
 import { useParams } from 'react-router-dom';
 import ReportForm from './ReportForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchReportThunk } from '../store/reports';
 
 const EditReportForm = () => {
   const { reportId } = useParams();
-  const report = {}; // populate from Redux store
+  const report = useSelector(state => state.reports[reportId]); // populate from Redux store
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchReportThunk(reportId))
+  }, [dispatch])
 
   if (!report) return(<></>);
 
@@ -21,4 +29,3 @@ const EditReportForm = () => {
 };
 
 export default EditReportForm;
-

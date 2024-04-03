@@ -56,6 +56,20 @@ export const createReportThunk = (report, navigate) => async (dispatch) => {
   }
 }
 
+export const editReportThunk = (report, navigate) => async (dispatch) => {
+  const res = await fetch(`/api/reports/${report.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(report)
+  })
+  const { id } = await res.json()
+  if(res.ok){
+    navigate(`/reports/${id}`)
+  }
+}
+
 export const fetchReportThunk = (reportId) => async (dispatch) => {
   const res = await fetch(`/api/reports/${reportId}`)
   const report = await res.json()

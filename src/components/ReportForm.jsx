@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { createReportThunk } from '../store/reports';
+import { createReportThunk, editReportThunk } from '../store/reports';
 
 const ReportForm = ({ report, formType }) => {
   const navigate = useNavigate();
@@ -23,7 +23,12 @@ const ReportForm = ({ report, formType }) => {
     }
     setErrors(newErrors)
     if(Object.keys(newErrors).length === 0){
-      dispatch(createReportThunk(report, navigate))
+      if(formType === "Create Report"){
+        dispatch(createReportThunk(report, navigate))
+      }
+      if(formType === "Update Report"){
+        dispatch(editReportThunk(report, navigate))
+      }
     }
   };
 
