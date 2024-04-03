@@ -11,6 +11,8 @@ const ReportForm = ({ report, formType }) => {
     e.preventDefault();
     setErrors({});
     report = { ...report, understanding, improvement };
+
+    
   };
 
   /* **DO NOT CHANGE THE RETURN VALUE** */
