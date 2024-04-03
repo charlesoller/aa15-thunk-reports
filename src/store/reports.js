@@ -42,7 +42,7 @@ export const deleteReportThunk = (reportId) => async (dispatch) => {
   }
 }
 
-export const createReportThunk = (report) => async (dispatch) => {
+export const createReportThunk = (report, navigate) => async (dispatch) => {
   const res = await fetch("/api/reports", {
     method: "POST",
     headers: {
@@ -50,9 +50,9 @@ export const createReportThunk = (report) => async (dispatch) => {
     },
     body: JSON.stringify(report)
   })
-  console.log("RES: ", res)
+  const { id } = await res.json()
   if(res.ok){
-    dispatch()
+    navigate(`/reports/${id}`)
   }
 }
 
