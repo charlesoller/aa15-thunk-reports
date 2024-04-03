@@ -30,9 +30,18 @@ export const removeReport = (reportId) => ({
 export const fetchReportsThunk = () => async (dispatch) => {
   const res = await fetch("/api/reports");
   const reports = await res.json();
-  // console.log("REPORTS: ", reports)
   dispatch(loadReports(reports));
 };
+
+export const deleteReportThunk = (reportId) => async (dispatch) => {
+  const res = await fetch(`/api/reports/${reportId}`, {
+    method: "DELETE",
+  })
+  console.log(res)
+  if(res.ok){
+    dispatch(removeReport(reportId))
+  }
+}
 
 // Your code here
 
