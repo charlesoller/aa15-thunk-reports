@@ -37,9 +37,16 @@ export const deleteReportThunk = (reportId) => async (dispatch) => {
   const res = await fetch(`/api/reports/${reportId}`, {
     method: "DELETE",
   })
-  console.log(res)
   if(res.ok){
     dispatch(removeReport(reportId))
+  }
+}
+
+export const fetchReportThunk = (reportId) => async (dispatch) => {
+  const res = await fetch(`/api/reports/${reportId}`)
+  const report = await res.json()
+  if(res.ok){
+    dispatch(receiveReport(report))
   }
 }
 
